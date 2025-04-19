@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* New sleek design based on the provided image */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -13,8 +14,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Updated primary color to match the teal in the image */
+    --primary: 187 100% 42%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -22,8 +24,8 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 187 100% 42%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -32,30 +34,42 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.4rem; /* Reduced by 20% from 0.5rem */
+    --radius: 0.3rem; /* Reduced for sleeker appearance */
 
-    /* Nexus Real Estate custom variables */
-    --nexus-sidebar-bg: 0 0% 100%;
-    --nexus-sidebar-hover: 0 0% 96%;
-    --nexus-sidebar-active: 0 0% 94%;
-    --nexus-sidebar-text: 220 9% 35%;
-    --nexus-sidebar-active-text: 222 47% 11%;
-    --nexus-sidebar-border: 220 13% 91%;
-    --nexus-logo-color: 43 96% 56%;
+    /* Status colors from the image */
+    --status-pending: 45 100% 51%;
+    --status-overdue: 0 100% 65%;
+    --status-paid: 142 76% 36%;
+
+    /* Nexus Finance custom variables */
+    --nexus-sidebar-bg: 215 28% 17%;
+    --nexus-sidebar-hover: 217 33% 20%;
+    --nexus-sidebar-active: 187 100% 42%;
+    --nexus-sidebar-text: 214 32% 80%;
+    --nexus-sidebar-active-text: 0 0% 100%;
+    --nexus-sidebar-border: 217 33% 17%;
+    --nexus-logo-color: 187 100% 42%;
+    --nexus-header-bg: 215 28% 17%;
+    --nexus-header-text: 0 0% 100%;
+    --nexus-table-header: 215 28% 17%;
+    --nexus-table-header-text: 0 0% 100%;
+    --nexus-table-row-hover: 210 40% 98%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Dark theme based on the image (which is already dark) */
+    --background: 215 28% 17%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 215 28% 19%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 215 28% 17%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Keep primary color consistent with light theme */
+    --primary: 187 100% 42%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -63,8 +77,8 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 187 100% 42%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -73,14 +87,24 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
-    /* Nexus Real Estate custom variables - dark mode */
-    --nexus-sidebar-bg: 222 47% 11%;
-    --nexus-sidebar-hover: 217 33% 17%;
-    --nexus-sidebar-active: 217 33% 17%;
-    --nexus-sidebar-text: 214 32% 65%;
+    /* Status colors from the image */
+    --status-pending: 45 100% 51%;
+    --status-overdue: 0 100% 65%;
+    --status-paid: 142 76% 36%;
+
+    /* Nexus Finance custom variables - dark mode */
+    --nexus-sidebar-bg: 215 28% 17%;
+    --nexus-sidebar-hover: 217 33% 20%;
+    --nexus-sidebar-active: 187 100% 42%;
+    --nexus-sidebar-text: 214 32% 80%;
     --nexus-sidebar-active-text: 0 0% 100%;
     --nexus-sidebar-border: 217 33% 17%;
-    --nexus-logo-color: 43 96% 56%;
+    --nexus-logo-color: 187 100% 42%;
+    --nexus-header-bg: 215 28% 17%;
+    --nexus-header-text: 0 0% 100%;
+    --nexus-table-header: 215 28% 17%;
+    --nexus-table-header-text: 0 0% 100%;
+    --nexus-table-row-hover: 217 33% 20%;
   }
 }
 

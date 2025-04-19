@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -15,8 +16,49 @@ import ModuleCards from "./dashboard/ModuleCards";
 import PortfolioOverview from "./dashboard/PortfolioOverview";
 import Sidebar from "./layout/Sidebar";
 import { ThemeToggle } from "./layout/ThemeToggle";
+import Projects from "./Projects";
+
+const Dashboard: React.FC = () => {
+  return (
+    <div className="max-w-7xl mx-auto space-y-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <div className="flex items-center gap-2">
+          <Tabs defaultValue="all">
+            <TabsList>
+              <TabsTrigger value="all">All Projects</TabsTrigger>
+              <TabsTrigger value="active">Active</TabsTrigger>
+              <TabsTrigger value="planning">Planning</TabsTrigger>
+            </TabsList>
+            <TabsContent value="all">
+              {/* Content for All Projects tab */}
+            </TabsContent>
+            <TabsContent value="active">
+              {/* Content for Active tab */}
+            </TabsContent>
+            <TabsContent value="planning">
+              {/* Content for Planning tab */}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+
+      {/* Metrics Overview */}
+      <MetricsOverview />
+
+      {/* Portfolio Overview */}
+      <PortfolioOverview />
+
+      {/* Module Cards */}
+      <ModuleCards />
+    </div>
+  );
+};
 
 const Home: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div className="flex h-screen bg-background">
       <Sidebar
@@ -27,71 +69,78 @@ const Home: React.FC = () => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="h-16 border-b flex items-center justify-between px-6">
+        <header className="h-16 bg-nexus-light-header dark:bg-nexus-dark-header text-nexus-light-headerText dark:text-nexus-dark-headerText flex items-center justify-between px-6 border-b border-nexus-light-sidebarBorder dark:border-nexus-dark-sidebarBorder">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-white"
+            >
               <Menu className="h-5 w-5" />
             </Button>
-            <div className="relative w-64 hidden md:block">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search..."
-                className="w-full rounded-md border border-input bg-background pl-8 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
+            <h1 className="text-xl font-semibold hidden md:block">
+              Nexus Finance Management
+            </h1>
+            <div className="flex space-x-1 ml-6">
+              <Button
+                variant="ghost"
+                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
+              >
+                Finance Overview
+              </Button>
+              <Button
+                variant="ghost"
+                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
+              >
+                General Ledger
+              </Button>
+              <Button
+                variant="primary"
+                className="bg-primary text-white hover:bg-primary/90"
+              >
+                AP/AR
+              </Button>
+              <Button
+                variant="ghost"
+                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
+              >
+                Budgeting
+              </Button>
+              <Button
+                variant="ghost"
+                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
+              >
+                Audit & Compliance
+              </Button>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <Button variant="ghost" size="icon">
+            <div className="relative w-64 hidden md:block">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
+              <input
+                type="search"
+                placeholder="Search..."
+                className="w-full rounded-md border border-gray-700 bg-gray-800 pl-8 py-2 text-sm text-white placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+              />
+            </div>
+            <Button variant="ghost" size="icon" className="text-white">
               <Bell className="h-5 w-5" />
             </Button>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium hidden md:inline-block">
-                Nexus Development Corp
+              <span className="text-sm font-medium hidden md:inline-block text-white">
+                JD
               </span>
-              <Button variant="ghost" size="icon">
-                <ChevronDown className="h-4 w-4" />
-              </Button>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
         <main className="flex-1 overflow-auto p-6">
-          <div className="max-w-7xl mx-auto space-y-8">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-              <div className="flex items-center gap-2">
-                <Tabs defaultValue="all">
-                  <TabsList>
-                    <TabsTrigger value="all">All Projects</TabsTrigger>
-                    <TabsTrigger value="active">Active</TabsTrigger>
-                    <TabsTrigger value="planning">Planning</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="all">
-                    {/* Content for All Projects tab */}
-                  </TabsContent>
-                  <TabsContent value="active">
-                    {/* Content for Active tab */}
-                  </TabsContent>
-                  <TabsContent value="planning">
-                    {/* Content for Planning tab */}
-                  </TabsContent>
-                </Tabs>
-              </div>
-            </div>
-
-            {/* Metrics Overview */}
-            <MetricsOverview />
-
-            {/* Portfolio Overview */}
-            <PortfolioOverview />
-
-            {/* Module Cards */}
-            <ModuleCards />
-          </div>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/portfolio/projects" element={<Projects />} />
+          </Routes>
         </main>
       </div>
     </div>

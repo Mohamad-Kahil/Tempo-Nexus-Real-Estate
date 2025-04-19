@@ -33,28 +33,33 @@ const ModuleCard = ({
   onClick = () => {},
 }: ModuleCardProps) => {
   return (
-    <Card className="bg-white dark:bg-slate-800 overflow-hidden h-full flex flex-col">
+    <Card className="bg-white dark:bg-nexus-dark-sidebar overflow-hidden h-full flex flex-col border-0 shadow-md">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-md bg-primary/10 text-primary">
               {icon}
             </div>
-            <CardTitle>{title}</CardTitle>
+            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
           </div>
         </div>
-        <CardDescription className="mt-2">{description}</CardDescription>
+        <CardDescription className="mt-2 text-sm">
+          {description}
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
         <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-muted-foreground font-medium">
                 {stat.label}
               </span>
-              <span className="text-2xl font-bold">{stat.value}</span>
+              <span className="text-xl font-bold">{stat.value}</span>
               {stat.color && (
-                <Badge variant="outline" className={`mt-1 w-fit ${stat.color}`}>
+                <Badge
+                  variant="outline"
+                  className={`mt-1 w-fit ${stat.color.includes("green") ? "text-nexus-light-statusPaid" : stat.color.includes("red") ? "text-nexus-light-statusOverdue" : "text-nexus-light-statusPending"} bg-transparent border-current`}
+                >
                   {stat.color.includes("green")
                     ? "Increasing"
                     : stat.color.includes("red")
@@ -66,8 +71,11 @@ const ModuleCard = ({
           ))}
         </div>
       </CardContent>
-      <CardFooter className="pt-2 border-t">
-        <Button onClick={onClick} className="w-full">
+      <CardFooter className="pt-2 border-t border-gray-200 dark:border-gray-700">
+        <Button
+          onClick={onClick}
+          className="w-full bg-primary hover:bg-primary/90 text-white"
+        >
           {ctaText} <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </CardFooter>
@@ -79,49 +87,51 @@ interface ModuleCardsProps {
   onNavigate?: (path: string) => void;
 }
 
-const ModuleCards = ({ onNavigate = () => {} }: ModuleCardsProps) => {
+const ModuleCards = ({
+  onNavigate = (path: string) => {},
+}: ModuleCardsProps) => {
   const modules = [
     {
-      title: "Project Explorer",
+      title: "Finance Overview",
       description:
-        "Navigate through your real estate portfolio, phases, buildings, and units",
+        "View financial summaries, cash flow, and key performance indicators",
+      icon: <BarChart3 className="h-5 w-5" />,
+      stats: [
+        { label: "Total Revenue", value: "$1.2M" },
+        { label: "Expenses", value: "$780K" },
+        { label: "Profit Margin", value: "35%", color: "text-green-600" },
+        { label: "YoY Growth", value: "12%", color: "text-green-600" },
+      ],
+      ctaText: "View Financials",
+      path: "/portfolio/projects",
+    },
+    {
+      title: "AP/AR Management",
+      description:
+        "Manage accounts payable, receivables, and track payment statuses",
       icon: <Building2 className="h-5 w-5" />,
       stats: [
-        { label: "Active Projects", value: 12 },
-        { label: "Total Units", value: 1458 },
-        { label: "Phases in Progress", value: 8 },
-        { label: "Completion Rate", value: "68%", color: "text-green-600" },
+        { label: "Pending Invoices", value: 24 },
+        { label: "Overdue", value: 8, color: "text-red-600" },
+        { label: "Paid This Month", value: "$125K" },
+        { label: "To Be Collected", value: "$187K" },
       ],
-      ctaText: "Explore Projects",
-      path: "/projects",
+      ctaText: "Manage AP/AR",
+      path: "/portfolio/projects",
     },
     {
-      title: "CRM Pipeline",
+      title: "Budgeting & Forecasting",
       description:
-        "Manage leads, prospects, and sales opportunities in your pipeline",
+        "Create and monitor budgets, track variances, and forecast financials",
       icon: <Users className="h-5 w-5" />,
       stats: [
-        { label: "Active Leads", value: 87 },
-        { label: "Opportunities", value: 34 },
-        { label: "Conversion Rate", value: "23%", color: "text-amber-600" },
-        { label: "Deals Closed", value: 9, color: "text-green-600" },
+        { label: "Active Budgets", value: 5 },
+        { label: "Budget Variance", value: "-3.2%", color: "text-amber-600" },
+        { label: "Forecast Accuracy", value: "92%", color: "text-green-600" },
+        { label: "Next Review", value: "May 15" },
       ],
-      ctaText: "View Pipeline",
+      ctaText: "View Budgets",
       path: "/crm",
-    },
-    {
-      title: "Property Management",
-      description:
-        "Monitor units, tenants, and maintenance requests across properties",
-      icon: <Wrench className="h-5 w-5" />,
-      stats: [
-        { label: "Occupied Units", value: 876 },
-        { label: "Vacancy Rate", value: "12%", color: "text-red-600" },
-        { label: "Maintenance Tickets", value: 42 },
-        { label: "Upcoming Renewals", value: 18 },
-      ],
-      ctaText: "Manage Properties",
-      path: "/properties",
     },
   ];
 
@@ -129,13 +139,19 @@ const ModuleCards = ({ onNavigate = () => {} }: ModuleCardsProps) => {
     <div className="w-full bg-background">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Quick Access</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Financial Modules
+          </h2>
           <p className="text-muted-foreground">
-            Access key modules of your real estate platform
+            Access key financial management tools and reports
           </p>
         </div>
-        <Button variant="outline" size="sm" className="gap-1">
-          <BarChart3 className="h-4 w-4" /> View All Analytics
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-1 border-gray-700 text-gray-200 hover:bg-gray-800"
+        >
+          <BarChart3 className="h-4 w-4" /> View All Reports
         </Button>
       </div>
 

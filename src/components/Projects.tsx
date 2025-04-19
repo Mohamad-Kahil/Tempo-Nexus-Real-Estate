@@ -3,7 +3,17 @@ import { SubmoduleTabs, SubmoduleContent } from "@/components/ui/tabs-custom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Plus, Filter, Map, List, GanttChart } from "lucide-react";
+import {
+  Plus,
+  Filter,
+  Map,
+  List,
+  GanttChart,
+  Search,
+  Download,
+  FileText,
+  BarChart4,
+} from "lucide-react";
 
 interface Project {
   id: string;
@@ -72,8 +82,16 @@ const getStatusColor = (status: Project["status"]) => {
 const ProjectListView = () => {
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
+            <input
+              type="search"
+              placeholder="Search transactions..."
+              className="w-full rounded-md border border-gray-700 bg-gray-800 pl-8 py-2 text-sm text-white placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+            />
+          </div>
           <Button
             variant="outline"
             size="sm"
@@ -81,31 +99,28 @@ const ProjectListView = () => {
           >
             <Filter className="h-4 w-4 mr-2" /> Filter
           </Button>
-          <span className="text-sm text-muted-foreground">
-            Showing {sampleProjects.length} projects
-          </span>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2 w-full md:w-auto justify-end">
           <Button
             variant="outline"
             size="sm"
             className="border-primary text-primary hover:bg-primary/10"
           >
-            Accounts Payable
+            <FileText className="h-4 w-4 mr-2" /> Accounts Payable
           </Button>
           <Button
             variant="outline"
             size="sm"
             className="border-primary text-primary hover:bg-primary/10"
           >
-            Accounts Receivable
+            <FileText className="h-4 w-4 mr-2" /> Accounts Receivable
           </Button>
           <Button
             variant="outline"
             size="sm"
             className="border-gray-700 text-gray-200 hover:bg-gray-800"
           >
-            Export
+            <Download className="h-4 w-4 mr-2" /> Export
           </Button>
           <Button
             size="sm"
@@ -114,6 +129,54 @@ const ProjectListView = () => {
             <Plus className="h-4 w-4 mr-2" /> Add Transaction
           </Button>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <Card className="bg-nexus-dark-sidebar/30 border-gray-800">
+          <CardContent className="p-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm text-gray-400">Total Payable</p>
+                <h3 className="text-2xl font-bold mt-1">$124,568.00</h3>
+                <p className="text-xs text-green-400 mt-1">
+                  +2.5% from last month
+                </p>
+              </div>
+              <div className="p-3 rounded-full bg-blue-500/10">
+                <BarChart4 className="h-6 w-6 text-blue-400" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="bg-nexus-dark-sidebar/30 border-gray-800">
+          <CardContent className="p-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm text-gray-400">Total Receivable</p>
+                <h3 className="text-2xl font-bold mt-1">$89,342.00</h3>
+                <p className="text-xs text-red-400 mt-1">
+                  -1.2% from last month
+                </p>
+              </div>
+              <div className="p-3 rounded-full bg-purple-500/10">
+                <BarChart4 className="h-6 w-6 text-purple-400" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="bg-nexus-dark-sidebar/30 border-gray-800">
+          <CardContent className="p-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm text-gray-400">Pending Approvals</p>
+                <h3 className="text-2xl font-bold mt-1">12</h3>
+                <p className="text-xs text-amber-400 mt-1">4 high priority</p>
+              </div>
+              <div className="p-3 rounded-full bg-amber-500/10">
+                <FileText className="h-6 w-6 text-amber-400" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="overflow-hidden rounded-md border border-gray-800">
@@ -220,13 +283,20 @@ const ProjectListView = () => {
 
 const ProjectMapView = () => {
   return (
-    <div className="h-full flex items-center justify-center bg-muted/20 rounded-md border border-dashed">
+    <div className="h-full flex items-center justify-center bg-nexus-dark-sidebar/30 rounded-md border border-gray-800">
       <div className="text-center">
-        <Map className="h-12 w-12 mx-auto text-muted-foreground" />
-        <h3 className="mt-4 text-lg font-medium">Map View</h3>
-        <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
-          Geographic visualization of projects would be displayed here.
+        <BarChart4 className="h-12 w-12 mx-auto text-primary/60" />
+        <h3 className="mt-4 text-lg font-medium">Financial Analytics</h3>
+        <p className="mt-2 text-sm text-gray-400 max-w-md mx-auto">
+          Financial analytics and visualization dashboard would be displayed
+          here.
         </p>
+        <Button
+          variant="outline"
+          className="mt-4 border-gray-700 text-gray-200 hover:bg-gray-800"
+        >
+          Configure Analytics
+        </Button>
       </div>
     </div>
   );
@@ -234,13 +304,19 @@ const ProjectMapView = () => {
 
 const ProjectGanttView = () => {
   return (
-    <div className="h-full flex items-center justify-center bg-muted/20 rounded-md border border-dashed">
+    <div className="h-full flex items-center justify-center bg-nexus-dark-sidebar/30 rounded-md border border-gray-800">
       <div className="text-center">
-        <GanttChart className="h-12 w-12 mx-auto text-muted-foreground" />
-        <h3 className="mt-4 text-lg font-medium">Gantt Chart</h3>
-        <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
-          Timeline visualization of project schedules would be displayed here.
+        <FileText className="h-12 w-12 mx-auto text-primary/60" />
+        <h3 className="mt-4 text-lg font-medium">Financial Reports</h3>
+        <p className="mt-2 text-sm text-gray-400 max-w-md mx-auto">
+          Generate and view financial reports, statements, and tax documents.
         </p>
+        <Button
+          variant="outline"
+          className="mt-4 border-gray-700 text-gray-200 hover:bg-gray-800"
+        >
+          Generate Report
+        </Button>
       </div>
     </div>
   );
@@ -250,9 +326,9 @@ const Projects = () => {
   const [activeTab, setActiveTab] = useState<string>("list");
 
   const tabs = [
-    { id: "list", label: "List View" },
-    { id: "map", label: "Map View" },
-    { id: "gantt", label: "Gantt Chart" },
+    { id: "list", label: "Transactions" },
+    { id: "map", label: "Analytics" },
+    { id: "gantt", label: "Reports" },
   ];
 
   const renderContent = () => {
@@ -269,18 +345,30 @@ const Projects = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-tight">AP/AR Management</h1>
-        <div className="flex space-x-2">
-          <div className="relative w-64">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-            <input
-              type="search"
-              placeholder="Search transactions..."
-              className="w-full rounded-md border border-gray-700 bg-gray-800 pl-8 py-2 text-sm text-white placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
-            />
-          </div>
+    <div className="max-w-7xl mx-auto space-y-6 p-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">
+            AP/AR Management
+          </h1>
+          <p className="text-sm text-gray-400 mt-1">
+            Manage your financial transactions and reporting
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-gray-700 text-gray-200 hover:bg-gray-800"
+          >
+            <Download className="h-4 w-4 mr-2" /> Export Data
+          </Button>
+          <Button
+            size="sm"
+            className="bg-primary text-white hover:bg-primary/90"
+          >
+            <Plus className="h-4 w-4 mr-2" /> New Transaction
+          </Button>
         </div>
       </div>
 
@@ -292,7 +380,7 @@ const Projects = () => {
         />
       </div>
 
-      <SubmoduleContent className="h-[calc(100vh-240px)] bg-transparent border-gray-800">
+      <SubmoduleContent className="h-[calc(100vh-320px)] bg-transparent border-gray-800">
         {renderContent()}
       </SubmoduleContent>
     </div>

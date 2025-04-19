@@ -69,7 +69,7 @@ const Home: React.FC = () => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="h-16 bg-nexus-light-header dark:bg-nexus-dark-header text-nexus-light-headerText dark:text-nexus-dark-headerText flex items-center justify-between px-6 border-b border-nexus-light-sidebarBorder dark:border-nexus-dark-sidebarBorder">
+        <header className="h-[4.8rem] bg-nexus-light-header dark:bg-nexus-dark-header text-nexus-light-headerText dark:text-nexus-dark-headerText flex items-center justify-between px-6 border-b border-nexus-light-sidebarBorder dark:border-nexus-dark-sidebarBorder">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
@@ -78,41 +78,19 @@ const Home: React.FC = () => {
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <h1 className="text-xl font-semibold hidden md:block">
-              Nexus Finance Management
+            <h1 className="text-2xl font-semibold hidden md:block">
+              {location.pathname.includes("/portfolio/ap-ar")
+                ? "AP/AR Management"
+                : location.pathname.includes("/portfolio/projects")
+                  ? "Projects"
+                  : location.pathname.includes("/portfolio")
+                    ? "Portfolio"
+                    : location.pathname.includes("/crm")
+                      ? "CRM"
+                      : location.pathname.includes("/property")
+                        ? "Property Management"
+                        : "Dashboard"}
             </h1>
-            <div className="flex space-x-1 ml-6">
-              <Button
-                variant="ghost"
-                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
-              >
-                Finance Overview
-              </Button>
-              <Button
-                variant="ghost"
-                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
-              >
-                General Ledger
-              </Button>
-              <Button
-                variant="primary"
-                className="bg-primary text-white hover:bg-primary/90"
-              >
-                AP/AR
-              </Button>
-              <Button
-                variant="ghost"
-                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
-              >
-                Budgeting
-              </Button>
-              <Button
-                variant="ghost"
-                className="text-white hover:bg-nexus-light-sidebarHover dark:hover:bg-nexus-dark-sidebarHover"
-              >
-                Audit & Compliance
-              </Button>
-            </div>
           </div>
 
           <div className="flex items-center gap-4">

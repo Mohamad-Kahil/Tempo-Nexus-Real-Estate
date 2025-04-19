@@ -63,6 +63,7 @@ const sidebarMenu: SidebarMenuItem[] = [
       { label: "Unit Models", path: "/portfolio/unit-models" },
       { label: "Engineering Status", path: "/portfolio/engineering" },
       { label: "Pricing & Payment Rules", path: "/portfolio/pricing" },
+      { label: "AP/AR Management", path: "/portfolio/ap-ar" },
     ],
   },
   {
@@ -183,11 +184,11 @@ const Sidebar = ({
       {/* Desktop Header */}
       <div className="hidden lg:flex items-center p-4 border-b border-nexus-light-sidebarBorder dark:border-nexus-dark-sidebarBorder">
         <div className="flex items-center">
-          <span className="text-nexus-light-logo dark:text-nexus-dark-logo font-bold text-lg">
+          <span className="text-nexus-light-logo dark:text-nexus-dark-logo font-bold text-xl">
             Nexus
           </span>
           {!collapsed && (
-            <span className="ml-1 font-semibold text-sm text-nexus-light-sidebarActiveText dark:text-nexus-dark-sidebarActiveText">
+            <span className="ml-1 font-semibold text-base text-nexus-light-sidebarActiveText dark:text-nexus-dark-sidebarActiveText">
               Real Estate
             </span>
           )}
